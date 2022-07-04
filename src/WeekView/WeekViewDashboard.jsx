@@ -13,7 +13,7 @@ function WeekViewDashboard() {
             <Row>
               {days.map((day) => (
                 <Col>
-                  <DayView day={day}/>
+                  <DayView day={day} key={day}/>
                 </Col>
               ))}
             </Row>
