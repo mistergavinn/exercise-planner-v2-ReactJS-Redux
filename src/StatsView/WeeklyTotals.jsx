@@ -1,7 +1,19 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { selectDay } from '../Redux/Reducers/weekViewSlice';
 
 function WeeklyTotals() {
+
+  let totalDistance = 0;
+  let totalDuration = 0;
+  const days = useSelector(selectDay);
+  days.map((day) => {
+    totalDistance += parseInt(day.distance);
+    totalDuration += parseInt(day.duration);
+    return [totalDistance, totalDuration];
+  });
+  let totalDurationHours = totalDuration / 60;
     return (
       <div>
         Weekly Totals
@@ -30,13 +42,13 @@ function WeeklyTotals() {
             </tr>
             <tr>
               <th colSpan={2}></th>
-              <th>Distance:</th>
-              <th>Duration:</th>
+              <th>Distance (Km):</th>
+              <th>Duration (Hours):</th>
             </tr>
             <tr>
               <td colSpan={2}>Total:</td>
-              <td>55</td>
-              <td>124</td>
+              <td>{totalDistance}</td>
+              <td>{totalDurationHours}</td>
             </tr>
           </tbody>
         </Table>
