@@ -1,10 +1,14 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { selectDay } from '../Redux/Reducers/weekViewSlice';
 import DayView from './DayView';
 
-const days =[ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+//const days =[ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 function WeekViewDashboard() {
+  const days = useSelector(selectDay); //taking value of day from store
+
     return (
       <div>
         This is WeekViewDashboard
@@ -13,7 +17,13 @@ function WeekViewDashboard() {
             <Row>
               {days.map((day) => (
                 <Col>
-                  <DayView day={day} key={day}/>
+                  <DayView 
+                  key={day.day}
+                  day={day.day} 
+                  distance={day.distance}
+                  duration={day.duration}
+                  description={day.description}
+                  />
                 </Col>
               ))}
             </Row>

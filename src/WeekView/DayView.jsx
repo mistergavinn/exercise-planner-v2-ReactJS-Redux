@@ -1,14 +1,10 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Container, Form } from 'react-bootstrap';
-
+import { updateDescription, updateDistance, updateDuration } from '../Redux/Reducers/weekViewSlice';
 
 const DayView = (props) => {
-  
   const dispatch = useDispatch();
-  const [distance, setDistance] = useState(2);
-  const [duration, setDuration] = useState(4);
-  const [description, setDescription] = useState("Test");
 
     return (
       <div>
@@ -23,8 +19,8 @@ const DayView = (props) => {
               <Form.Control
                 type="number"
                 placeholder="Km"
-                value={distance}
-                onChange={(e) => setDistance(e.target.value)}
+                value={props.distance}
+                onChange={(e) => dispatch(updateDistance([props.day,e.target.value]))}
               />
             </Form.Group>
 
@@ -34,8 +30,8 @@ const DayView = (props) => {
               <Form.Control
                 type="number"
                 placeholder="Minutes"
-                value={duration}
-                onChange={(e) => setDuration(e.target.value)}
+                value={props.duration}
+                onChange={(e) => dispatch(updateDuration([props.day,e.target.value]))}
               />
             </Form.Group>
 
@@ -45,8 +41,8 @@ const DayView = (props) => {
               <Form.Control
                 as="textarea"
                 rows={5}
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                value={props.description}
+                onChange={(e) => dispatch(updateDescription([props.day,e.target.value]))}
               />
             </Form.Group>
           </Form>
